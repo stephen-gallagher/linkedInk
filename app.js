@@ -47,6 +47,9 @@ app.use('/api', tattoo);
 const collection = require('./routes/collection');
 app.use('/api', collection);
 
+const image = require('./routes/image');
+app.use('/api', image);
+
 //  handle errors
 require('./error-handling')(app);
 

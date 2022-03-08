@@ -44,16 +44,18 @@ export default function Navigation(props) {
                 </NavDropdown.Item>
 
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="/new-studio">
-                  Add a Studio
-                </NavDropdown.Item>
+                {props.user && props.user.role === 'Artist' && (
+                  <NavDropdown.Item href="/new-studio">
+                    Add a Studio
+                  </NavDropdown.Item>
+                )}
               </NavDropdown>
             </Nav>
             <Nav>
               {!props.user && (
                 <>
                   <Nav.Link href="#deets">Log In</Nav.Link>
-                  <Nav.Link eventKey={2} href="#memes">
+                  <Nav.Link eventKey={2} href="/signup">
                     Sign Up
                   </Nav.Link>
                 </>

@@ -32,78 +32,58 @@ function App(props) {
 
       <Routes>
         <Route
-          exact
-          path="/yo"
+          path="/"
           element={<Homepage setUser={addUser} {...props} user={user} />}
         />
         <Route
-          exact
           path="/explore"
-          render={(props) => (
+          element={(props) => (
             <Explore setUser={addUser} {...props} user={user} />
           )}
         />
         <Route
-          exact
           path="/signup"
-          render={(props) => <Signup setUser={addUser} {...props} />}
+          element={<Signup setUser={addUser} {...props} />}
         />
         <Route
-          exact
           path="/login"
-          render={(props) => <Login setUser={addUser} {...props} />}
+          element={(props) => <Login setUser={addUser} {...props} />}
         />
         <Route
-          exact
           path="/:id/user-dashboard"
           user={user}
-          component={UserDashboard}
+          element={(props) => (
+            <UserDashboard setUser={addUser} {...props} user={user} />
+          )}
         />
 
         <Route
-          exact
           path="/:id/artist-profile"
-          // user={user}
-          // component={ArtistProfile}
-          render={(props) => (
+          element={(props) => (
             <ArtistProfile setUser={addUser} {...props} user={user} />
           )}
         />
         <Route
-          exact
           path="/all-artists"
-          render={(props) => (
+          element={(props) => (
             <AllArtists setUser={addUser} {...props} user={user} />
           )}
         />
         <Route
-          exact
           path="/new-studio"
-          render={(props) => <NewStudio setUser={addUser} {...props} />}
+          element={(props) => <NewStudio setUser={addUser} {...props} />}
         />
         <Route
-          exact
           path="/all-studios"
-          render={(props) => (
+          element={(props) => (
             <AllStudios setUser={addUser} {...props} user={user} />
           )}
         />
         <Route
-          exact
           path="/studio/:id"
-          render={(props) => (
+          element={(props) => (
             <StudioShow setUser={addUser} {...props} user={user} />
           )}
-        />
-        <Route
-          exact
-          path="/tattoos/:id"
-          render={(props) => <TattooView setUser={addUser} {...props} />}
-        />
-        <Route
-          exact
-          path="/collections/:id"
-          render={(props) => <CollectionView setUser={addUser} {...props} />}
         />
       </Routes>
       <Footer />
