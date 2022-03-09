@@ -45,45 +45,32 @@ function App(props) {
           path="/signup"
           element={<Signup setUser={addUser} {...props} />}
         />
-        <Route
-          path="/login"
-          element={(props) => <Login setUser={addUser} {...props} />}
-        />
+        <Route path="/login" element={<Login setUser={addUser} {...props} />} />
         <Route
           path="/:id/user-dashboard"
           user={user}
-          element={(props) => (
-            <UserDashboard setUser={addUser} {...props} user={user} />
-          )}
+          element={<UserDashboard setUser={addUser} {...props} user={user} />}
         />
 
         <Route
           path="/:id/artist-profile"
-          element={(props) => (
-            <ArtistProfile setUser={addUser} {...props} user={user} />
-          )}
+          element={<ArtistProfile setUser={addUser} {...props} user={user} />}
         />
         <Route
           path="/all-artists"
-          element={(props) => (
-            <AllArtists setUser={addUser} {...props} user={user} />
-          )}
+          element={<AllArtists setUser={addUser} {...props} user={user} />}
         />
         <Route
           path="/new-studio"
-          element={(props) => <NewStudio setUser={addUser} {...props} />}
+          element={<NewStudio setUser={addUser} {...props} />}
         />
         <Route
           path="/all-studios"
-          element={(props) => (
-            <AllStudios setUser={addUser} {...props} user={user} />
-          )}
+          element={<AllStudios setUser={addUser} {...props} user={user} />}
         />
         <Route
           path="/studio/:id"
-          element={(props) => (
-            <StudioShow setUser={addUser} {...props} user={user} />
-          )}
+          element={<StudioShow setUser={addUser} {...props} user={user} />}
         />
       </Routes>
       <Footer />

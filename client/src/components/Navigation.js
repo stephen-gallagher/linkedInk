@@ -54,7 +54,7 @@ export default function Navigation(props) {
             <Nav>
               {!props.user && (
                 <>
-                  <Nav.Link href="#deets">Log In</Nav.Link>
+                  <Nav.Link href="/login">Log In</Nav.Link>
                   <Nav.Link eventKey={2} href="/signup">
                     Sign Up
                   </Nav.Link>
