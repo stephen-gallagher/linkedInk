@@ -53,9 +53,8 @@ export default function SignUpArtist(props) {
           // user is correctly signed up in the backend
           // add the user to the state of App.js
           props.setUser(response);
-          console.log('chika yeah!');
           // redirect to the projects overview
-          // navigate(`/${response._id}/user-dashboard`);
+          navigate(`/${response._id}/user-dashboard`);
         }
       })
       .catch((err) => console.log(err));

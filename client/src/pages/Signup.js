@@ -6,7 +6,6 @@ import SignUpUser from '../components/SignUpUser';
 import service from '../api/service';
 
 export default function Signup(props) {
-  console.log('these', props);
   const [toggled, setToggled] = useState(false);
   const [role, setRole] = useState('Artist');
   const [profilePicture, setProfilePicture] = useState('');
