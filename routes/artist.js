@@ -31,8 +31,9 @@ router.get('/all-artists', (req, res, next) => {
 });
 
 // get artist profile
-router.get('/:id/artist-profile/user', (req, res, next) => {
+router.get('/:id/artist-profile/artist', (req, res, next) => {
   User.findById(req.params.id)
+    .populate('artistCollection')
     .then((artistFromDB) => {
       res.status(200).json(artistFromDB);
     })
