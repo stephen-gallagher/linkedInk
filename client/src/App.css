@@ -57,8 +57,12 @@
   background-color: #04050f;
 }
 
-txt-darkBlue {
+.txt-darkBlue {
   color: #0b0f1a;
+}
+
+.roundedCorner {
+  border-radius: 25px;
 }
 
 .homepageImage {
@@ -122,3 +126,37 @@ txt-darkBlue {
 .toggle-switch input[type='checkbox']:checked + .switch {
   background-color: #171c22;
 }
+
+/* ------ TATTOO GRID -------- */
+.img-grid {
+  object-fit: cover;
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+
+.artist-grid:hover .img-grid {
+  opacity: 0.3;
+}
+
+.artist-grid:hover .middle {
+  opacity: 1;
+}
+
+/* ------- STUDIO PAGE -------- */
+.artist-image {
+  object-fit: cover; /* Do not scale the image */
+  width: 100%;
+}
+
+/* --------- PROFILES ---------- */
+/* .profileMainBlock {
+margin-top: 3;
+
+} */
+
+/*       className="col-md-10 col-md-10 offset-md-1 col-lg-5 offset-lg-0 mt-3 card mb-3 bg-dark border-4 border border-white"
+      style={{ height: '86vh', overflowX: 'auto', borderRadius: '15px' }} */

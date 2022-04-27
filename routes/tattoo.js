@@ -23,34 +23,36 @@ const { populate } = require('../models/User');
 router.post('/tattoos/create', (req, res, next) => {
   const { imageURL, caption, tags } = req.body;
   if (req.session.user) {
-  }
-  if (req.session.user) {
-    Tattoo.create({
-      imageURL: imageURL,
-      tags: tags,
-      caption: caption,
-      artist: req.session.user._id,
-    })
-      .then((createdTattoo) => {
-        console.log('tattoo', createdTattoo);
-        User.findByIdAndUpdate(
-          req.session.user._id,
-          { $push: { artistCollection: createdTattoo._id } },
-          { new: true }
-        )
-          .populate('artistCollection')
-          .then((userFromDB) => {
-            res.status(200).json(userFromDB);
-          })
-          .catch((err) => next(err));
+    if (imageURL) {
+      Tattoo.create({
+        imageURL: imageURL,
+        tags: tags,
+        caption: caption,
+        artist: req.session.user._id,
       })
-      .catch((err) => next(err));
+
+        .then((createdTattoo) => {
+          console.log('tattoo', createdTattoo);
+          User.findByIdAndUpdate(
+            req.session.user._id,
+            { $push: { artistCollection: createdTattoo._id } },
+            { new: true }
+          )
+            .populate('artistCollection')
+            .then((userFromDB) => {
+              res.status(200).json(userFromDB);
+            })
+            .catch((err) => next(err));
+        })
+        .catch((err) => next(err));
+    }
   }
 });
 
 // get all tattoos
 router.get('/tattoos', (req, res, next) => {
   Tattoo.find()
+    .populate('artist')
     .then((tattoosFromDB) => {
       res.status(200).json(tattoosFromDB);
     })

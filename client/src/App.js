@@ -37,9 +37,7 @@ function App(props) {
         />
         <Route
           path="/explore"
-          element={(props) => (
-            <Explore setUser={addUser} {...props} user={user} />
-          )}
+          element={<Explore setUser={addUser} {...props} user={user} />}
         />
         <Route
           path="/signup"
