@@ -158,5 +158,35 @@ margin-top: 3;
 
 } */
 
+/* ------- ALL ARTISTS -------- */
+.allArtistsOverlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.5s ease;
+  background: linear-gradient(to bottom right, #ff5959, #5bbaf9);
+}
+
+.allArtistsInformation {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .allArtistsOverlay {
+  opacity: 0.8;
+}
+
 /*       className="col-md-10 col-md-10 offset-md-1 col-lg-5 offset-lg-0 mt-3 card mb-3 bg-dark border-4 border border-white"
       style={{ height: '86vh', overflowX: 'auto', borderRadius: '15px' }} */
