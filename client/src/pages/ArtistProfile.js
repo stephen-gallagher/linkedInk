@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import ArtistBio from '../components/ArtistBio';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ArtistGallery from '../components/ArtistGallery';
+import UploadTattoo from '../components/UploadTattoo';
+import TattooView from '../components/TattooView';
+import ArtistReviews from '../components/ArtistReviews';
+import BookingForm from '../components/BookingForm';
 
 export default function ArtistProfile({ user }) {
   const [artist, setArtist] = useState(null);
   const [showComponent, setShowComponent] = useState('artistWork');
   const [selectedTattoo, setSelectedTattoo] = useState(null);
+  const [tattooPopup, setTattooPopup] = useState(false);
 
   const { id } = useParams();
 
@@ -28,7 +33,6 @@ export default function ArtistProfile({ user }) {
     <div
       style={{
         background: `radial-gradient(circle, rgba(255,255,255,1), rgba(140, 166, 196,1))`,
-        height: '90VH',
       }}
     >
       <div className="row bg-gradient">
@@ -42,8 +46,22 @@ export default function ArtistProfile({ user }) {
             artist={artist}
             setSelectedTattoo={setSelectedTattoo}
             setShowComponent={setShowComponent}
+            setTattooPopup={setTattooPopup}
           />
         )}
+        {showComponent === 'reviews' && (
+          <ArtistReviews user={user} artist={artist} getArtist={getArtist} />
+        )}
+        {tattooPopup && (
+          <TattooView
+            selectedTattoo={selectedTattoo}
+            user={user}
+            artist={artist}
+            setTattooPopup={setTattooPopup}
+          />
+        )}
+        {showComponent === 'bookings' && <BookingForm />}
+        {showComponent === 'imageUpload' && <UploadTattoo />}
       </div>
     </div>
   );
