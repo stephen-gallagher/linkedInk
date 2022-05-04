@@ -33,7 +33,14 @@ router.get('/all-artists', (req, res, next) => {
 // get artist profile
 router.get('/:id/artist-profile/artist', (req, res, next) => {
   User.findById(req.params.id)
-    .populate('artistCollection')
+    .populate({
+      path: 'artistCollection',
+      populate: {
+        path: 'artist',
+        model: 'User',
+      },
+    })
+    .populate('reviews')
     .then((artistFromDB) => {
       res.status(200).json(artistFromDB);
     })
@@ -54,6 +61,7 @@ router.get('/:id/artist-profile', (req, res, next) => {
 // create review on artist page
 router.post('/:id/artist-profile/reviews', (req, res, next) => {
   const { reviewText, rating } = req.body;
+  console.log('yo yo', req.params);
   Review.create({
     reviewText: reviewText,
     rating: rating,
@@ -79,24 +87,23 @@ router.post('/:id/artist-profile/reviews', (req, res, next) => {
 });
 
 // Delete artist review
-router.delete('/artist-profile/reviews/:reviewId', (req, res, next) => {
-  const { reviewId, id } = req.params;
-  console.log('ids', reviewId, id);
-  Review.findByIdAndDelete(reviewId, { new: true })
-    .then((deletedReview) => {
-      console.log('deletedReview', deletedReview);
-      res.status(200).json(deletedReview);
-    })
-    .catch((err) => next(err));
-});
-
-// Show Artist reviews's
-router.get('/:id/artist-profile/reviews', (req, res, next) => {
-  Review.find({ reviewArtist: req.params.id })
-    .then((reviews) => {
-      res.status(200).json(reviews);
-    })
-    .catch((err) => next(err));
-});
+router.delete(
+  '/artist-profile/reviews/:artistId/:reviewId',
+  (req, res, next) => {
+    const { reviewId, artistId } = req.params;
+    console.log('ids', reviewId, artistId);
+    Review.findByIdAndDelete(reviewId, { new: true })
+      .then((deletedReview) => {
+        User.findByIdAndUpdate(artistId, {
+          $pull: { reviews: reviewId },
+        })
+          .then((deletedReview) => {
+            res.status(200).json(deletedReview);
+          })
+          .catch((err) => next(err));
+      })
+      .catch((err) => next(err));
+  }
+);
 
 module.exports = router;
