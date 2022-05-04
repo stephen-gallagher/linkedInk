@@ -96,7 +96,9 @@ router.post('/new-studio', async (req, res, next) => {
 
 // studio show page
 router.get('/studio/:id', (req, res, next) => {
-  Studio.find({ _id: req.params.id })
+  Studio.findById(req.params.id)
+    .populate('artists')
+    .populate('reviews')
     .then((studio) => {
       res.status(200).json(studio);
     })
@@ -131,11 +133,17 @@ router.post('/studio/:id/reviews', (req, res, next) => {
 });
 
 // Delete studio review
-router.delete('/studio/reviews/:reviewId', (req, res, next) => {
-  const reviewId = req.params.reviewId;
+router.delete('/studio/reviews/:studioId/:reviewId', (req, res, next) => {
+  const { reviewId, studioId } = req.params;
   Review.findByIdAndDelete(reviewId, { new: true })
     .then((deletedReview) => {
-      res.status(200).json(deletedReview);
+      Studio.findByIdAndUpdate(studioId, {
+        $pull: { reviews: reviewId },
+      })
+        .then((deletedReview) => {
+          res.status(200).json(deletedReview);
+        })
+        .catch((err) => next(err));
     })
     .catch((err) => next(err));
 });
