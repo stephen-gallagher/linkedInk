@@ -45,7 +45,7 @@ export default function LoginForm(props) {
           <div className="card-body" style={{ background: 'rgb(17,27,26)' }}>
             <h3 className="mt-4 background righteous-35">Login</h3>
             <h5 className="card-title">Enter your details here</h5>
-            <form novalidate validated={validated} onSubmit={handleSubmit}>
+            <form noValidate validated={validated} onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label className="form-label" htmlFor="username">
                   Username:{' '}
