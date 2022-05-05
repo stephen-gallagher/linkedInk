@@ -4,12 +4,7 @@ import Fade from 'react-reveal/Fade';
 
 export default function Login(props) {
   return (
-    <div
-      style={{
-        background: `radial-gradient(circle, rgba(255,255,255,1), rgba(140, 166, 196,1))`,
-        height: '90VH',
-      }}
-    >
+    <div>
       <div className="row background pt-10">
         <LoginForm setUser={props.setUser} />
         <div className="col-6 offset-1 relative-bottom">

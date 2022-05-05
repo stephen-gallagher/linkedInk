@@ -53,12 +53,7 @@ export default function Signup(props) {
   };
 
   return (
-    <div
-      className="signupPage pt-5"
-      style={{
-        background: `radial-gradient(circle, rgba(255,255,255,1), rgba(140, 166, 196,1))`,
-      }}
-    >
+    <div className="signupPage pt-5">
       <SignUpToggle onChange={handleToggleChange} />
       {toggled ? (
         <SignUpUser

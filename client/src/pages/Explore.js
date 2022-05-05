@@ -35,12 +35,7 @@ export default function Explore() {
   });
 
   return (
-    <div
-      className="pt-5 background"
-      style={{
-        background: `radial-gradient(circle, rgba(255,255,255,1), rgba(140, 166, 196,1))`,
-      }}
-    >
+    <div className="pt-5 background">
       <ExploreSearchBlock search={search} setSearch={setSearch} />
       <TattooGallery
         newList={newList}

@@ -45,11 +45,7 @@ export default function Signup(props) {
   }
 
   return (
-    <div
-      style={{
-        background: `radial-gradient(circle, rgba(255,255,255,1), rgba(140, 166, 196,1))`,
-      }}
-    >
+    <div>
       <div className="container d-flex justify-content-center align-items-center mt-5 mb-5">
         <div className="row">
           {/* <h1 className="text-center">Add a new Studio</h1> */}

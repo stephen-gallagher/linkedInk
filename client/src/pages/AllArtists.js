@@ -38,12 +38,7 @@ export default function AllArtists() {
   }
 
   return (
-    <div
-      className="pt-5 background"
-      style={{
-        background: `radial-gradient(circle, rgba(255,255,255,1), rgba(140, 166, 196,1))`,
-      }}
-    >
+    <div className="pt-5 background">
       <div className="border border-white border-4 col-6 offset-3">
         <h1 className="exploreHeadingText mt-4">Find an Artist</h1>
         <div className="col-6 offset-3">
