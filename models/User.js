@@ -11,6 +11,7 @@ const userSchema = new Schema({
   firstName: String,
   lastName: String,
   email: String,
+  city: String,
   profilePicture: String,
   tattooStyle: [String],
   favouriteStyles: [String],
@@ -37,7 +38,7 @@ const userSchema = new Schema({
     {
       date: String,
       time: String,
-      Price: String,
+      price: String,
       location: {
         type: Schema.Types.ObjectId,
         ref: 'Studio',
