@@ -10,6 +10,7 @@ export default function SignUpArtist(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [profilePicture, setProfilePicture] = useState('');
+  const [city, setCity] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [tattooStyle, setTattooStyle] = useState('');
@@ -35,6 +36,7 @@ export default function SignUpArtist(props) {
       username,
       password,
       props.profilePicture,
+      city,
       firstName,
       lastName,
       aboutMe,
@@ -123,6 +125,20 @@ export default function SignUpArtist(props) {
                           style={{ height: '200px' }}
                         />
                       )}
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label" htmlFor="username">
+                        Username:{' '}
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="city"
+                        value={city}
+                        required
+                        autoFocus
+                        onChange={(e) => setCity(e.target.value)}
+                      />
                     </div>
                     <div className="mb-3">
                       <label className="form-label" htmlFor="favouriteStyles">
