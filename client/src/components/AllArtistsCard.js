@@ -14,8 +14,8 @@ export default function AllArtistsCard({ newList }) {
                     className="border border-white border-4"
                     src={artist.profilePicture}
                     style={{
-                      width: '300px',
-                      height: '400px',
+                      width: '10vw',
+                      height: '30vh',
                       borderRadius: '15px',
                     }}
                   ></img>
@@ -42,7 +42,6 @@ export default function AllArtistsCard({ newList }) {
                 }}
               ></div>
             </Fade>
-            \
           </div>
         );
       })}
