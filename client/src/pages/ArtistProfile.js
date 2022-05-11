@@ -7,12 +7,14 @@ import UploadTattoo from '../components/UploadTattoo';
 import TattooView from '../components/TattooView';
 import ArtistReviews from '../components/ArtistReviews';
 import BookingForm from '../components/BookingForm';
+import ReviewEdit from '../components/ReviewEdit';
 
-export default function ArtistProfile({ user }) {
+export default function ArtistProfile({ user, handleFileUpload, imageURL }) {
   const [artist, setArtist] = useState(null);
   const [showComponent, setShowComponent] = useState('artistWork');
   const [selectedTattoo, setSelectedTattoo] = useState(null);
   const [tattooPopup, setTattooPopup] = useState(false);
+  const [reviewToEdit, setReviewToEdit] = useState(null);
 
   const { id } = useParams();
 
@@ -28,6 +30,16 @@ export default function ArtistProfile({ user }) {
   useEffect(() => {
     getArtist();
   }, []);
+
+  const editReview = (reviewId) => {
+    axios
+      .get(`/api/editReview/${reviewId}`)
+      .then((response) => {
+        setReviewToEdit(response.data);
+        setShowComponent('editReview');
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -46,7 +58,24 @@ export default function ArtistProfile({ user }) {
           />
         )}
         {showComponent === 'reviews' && (
-          <ArtistReviews user={user} artist={artist} getArtist={getArtist} />
+          <ArtistReviews
+            user={user}
+            artist={artist}
+            getArtist={getArtist}
+            editReview={editReview}
+          />
+        )}
+        {showComponent === 'editReview' && (
+          <div
+            className="col-md-10 col-md-10 offset-md-1 col-lg-5 offset-lg-0 mt-3 card mb-3 bg-dark border-4 border border-white"
+            style={{ height: '86vh', overflowX: 'auto', borderRadius: '15px' }}
+          >
+            <ReviewEdit
+              reviewToEdit={reviewToEdit}
+              setShowComponent={setShowComponent}
+              getArtist={getArtist}
+            />
+          </div>
         )}
         {tattooPopup && (
           <TattooView
@@ -57,7 +86,13 @@ export default function ArtistProfile({ user }) {
           />
         )}
         {showComponent === 'bookings' && <BookingForm />}
-        {showComponent === 'imageUpload' && <UploadTattoo />}
+        {showComponent === 'imageUpload' && (
+          <UploadTattoo
+            handleFileUpload={handleFileUpload}
+            imageURL={imageURL}
+            setShowComponent={setShowComponent}
+          />
+        )}
       </div>
     </div>
   );

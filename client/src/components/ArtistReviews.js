@@ -6,10 +6,11 @@ import '../Starability.css';
 import ReviewCard from './ReviewCard';
 import ReviewForm from './ReviewForm';
 
-export default function ArtistReviews({ artist, user, getArtist }) {
+export default function ArtistReviews({ artist, user, getArtist, editReview }) {
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(0);
   const [message, setMessage] = useState('');
+  const [reviewDisplay, setReviewDisplay] = useState('reviewList');
 
   const { id } = useParams();
 
@@ -40,6 +41,7 @@ export default function ArtistReviews({ artist, user, getArtist }) {
       })
       .catch((err) => console.log(err));
   };
+
   if (artist === null) {
     return <></>;
   }
@@ -61,13 +63,13 @@ export default function ArtistReviews({ artist, user, getArtist }) {
             </div>
           ) : (
             <div>
-              2
               {artist.reviews.map((review) => {
                 return (
                   <ReviewCard
                     user={user}
                     review={review}
                     deleteReview={deleteReview}
+                    editReview={editReview}
                   />
                 );
               })}

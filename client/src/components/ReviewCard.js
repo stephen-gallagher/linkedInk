@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ReviewCard({ review, user, deleteReview }) {
+export default function ReviewCard({ review, user, deleteReview, editReview }) {
   return (
     <div className="card mt-3 col-6 offset-3 align-content-center mb-3 d-flex flex-column justify-content-center align-items-center bg-dark border-white">
       <div className="card-body ">
@@ -18,14 +18,24 @@ export default function ReviewCard({ review, user, deleteReview }) {
         {/* ({review.reviewAuthor} === {user._id} ?  */}
 
         {user && user._id === review.reviewAuthor ? (
-          <button
-            onClick={() => {
-              deleteReview(review._id);
-            }}
-            className="btn btn-sm btn-danger"
-          >
-            Delete
-          </button>
+          <div>
+            <button
+              onClick={() => {
+                deleteReview(review._id);
+              }}
+              className="btn btn-sm btn-danger m-1"
+            >
+              Delete
+            </button>
+            <button
+              onClick={() => {
+                editReview(review._id);
+              }}
+              className="btn btn-sm btn-info m-1"
+            >
+              Edit
+            </button>
+          </div>
         ) : (
           <></>
         )}
