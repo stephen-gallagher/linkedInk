@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-export default function UserAppointmentsForm({ getUserAppointments }) {
+export default function UserAppointmentsForm({ getUser }) {
   const [allStudios, setAllStudios] = useState([]);
   const [allArtists, setAllArtists] = useState([]);
   const [date, setDate] = useState('');
@@ -61,7 +61,7 @@ export default function UserAppointmentsForm({ getUserAppointments }) {
         artist: artist,
       })
       .then((response) => {
-        getUserAppointments();
+        getUser();
         return response.data;
       })
       .catch((err) => {

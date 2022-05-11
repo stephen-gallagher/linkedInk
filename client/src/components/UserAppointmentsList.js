@@ -6,21 +6,12 @@ import axios from 'axios';
 
 import UserAppointmentsForm from './UserAppointmentsForm';
 
-export default function UserAppointmentsList({ user, backgroundColor }) {
-  const [appointments, setAppointments] = useState([]);
+export default function UserAppointmentsList({
+  user,
+  getUser,
+  backgroundColor,
+}) {
   const [showForm, setShowForm] = useState(false);
-
-  const getUserAppointments = () => {
-    axios
-      .get(`/api/user/appointments`)
-      .then((response) => {
-        setAppointments(response.data.myAppointments);
-      })
-      .catch((err) => console.log(err));
-  };
-  useEffect(() => {
-    getUserAppointments();
-  }, []);
 
   if (!user) {
     return <></>;
@@ -37,11 +28,11 @@ export default function UserAppointmentsList({ user, backgroundColor }) {
       <Fade bottom duration={1000} delay={600} distance="30px">
         <h1 className="righteous mt-3">My Appointments</h1>
         <div className="d-flex flex-row justify-content-around mt-4">
-          {appointments.length === 0 ? (
+          {user.myAppointments.length === 0 ? (
             <h3 className="righteous">You currently have no appointments.</h3>
           ) : (
             <div>
-              {appointments.map((appointment) => {
+              {user.myAppointments.map((appointment) => {
                 return (
                   <div className="d-flex flex-column border-bottom border-top border-white p-3">
                     <div className="d-flex">
@@ -102,9 +93,7 @@ export default function UserAppointmentsList({ user, backgroundColor }) {
               </button>
             </div>
 
-            {showForm && (
-              <UserAppointmentsForm getUserAppointments={getUserAppointments} />
-            )}
+            {showForm && <UserAppointmentsForm getUser={getUser} />}
           </div>
         </div>
       </Fade>
