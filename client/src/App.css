@@ -53,6 +53,10 @@
   font-size: 3.5em;
 }
 
+.fullScreen {
+  min-height: 100vh;
+}
+
 .bg-darkBlue {
   background-color: #04050f;
 }
@@ -188,5 +192,36 @@ margin-top: 3;
   opacity: 0.8;
 }
 
+/* -------- USER DASHBOARD -------- */
+.vl {
+  border-left: 3px solid white;
+  height: 400px;
+}
+
+.vl2 {
+  border-left: 3px solid white;
+  height: 200px;
+}
+
+.collectionAlbum {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  /* width: 500px; */
+}
+
+.collectonThumbnail {
+  object-fit: cover; /* Do not scale the image */
+  width: 100%;
+}
+
+.righteous-12 {
+  font-size: 1.2em;
+  font-family: 'Righteous';
+}
 /*       className="col-md-10 col-md-10 offset-md-1 col-lg-5 offset-lg-0 mt-3 card mb-3 bg-dark border-4 border border-white"
       style={{ height: '86vh', overflowX: 'auto', borderRadius: '15px' }} */
+
+.bgTrans {
+  background-color: transparent;
+}

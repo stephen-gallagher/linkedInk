@@ -7,7 +7,6 @@ import { Routes, Route } from 'react-router-dom';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import UserDashboard from './pages/UserDashboard';
-// import ArtistDashboard from './pages/ArtistDashboard'
 import ProtectedRoute from './components/ProtectedRoute';
 import ArtistProfile from './pages/ArtistProfile';
 import Footer from './components/Footer';
@@ -15,8 +14,7 @@ import AllArtists from './pages/AllArtists';
 import AllStudios from './pages/AllStudios';
 import NewStudio from './pages/NewStudio';
 import StudioShow from './pages/StudioShow';
-import TattooView from './components/TattooView';
-import CollectionView from './components/CollectionView';
+import service from './api/service';
 
 function App(props) {
   const [user, setUser] = useState(props.user);
@@ -27,7 +25,12 @@ function App(props) {
   console.log('user: ', user);
 
   return (
-    <div className="App d-flex flex-column vh-100">
+    <div
+      className="App d-flex flex-column fullScreen"
+      style={{
+        background: `radial-gradient(circle, rgba(255,255,255,1), rgba(140, 166, 196,1))`,
+      }}
+    >
       <Navigation user={user} setUser={addUser} />
 
       <Routes>
