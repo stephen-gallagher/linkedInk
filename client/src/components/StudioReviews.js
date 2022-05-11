@@ -6,7 +6,7 @@ import '../Starability.css';
 import ReviewCard from './ReviewCard';
 import ReviewForm from './ReviewForm';
 
-export default function StudioReviews({ studio, user, getStudio }) {
+export default function StudioReviews({ studio, user, getStudio, editReview }) {
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(0);
   const [message, setMessage] = useState('');
@@ -67,6 +67,7 @@ export default function StudioReviews({ studio, user, getStudio }) {
                   user={user}
                   review={review}
                   deleteReview={deleteReview}
+                  editReview={editReview}
                 />
               );
             })}

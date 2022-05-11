@@ -4,11 +4,14 @@ import axios from 'axios';
 import StudioBio from '../components/StudioBio';
 import StudioArtists from '../components/StudioArtists';
 import StudioReviews from '../components/StudioReviews';
+import ReviewEdit from '../components/ReviewEdit';
 
 export default function StudioShow({ user }) {
   const [studio, setStudio] = useState(null);
   const [lng, setLng] = useState(null);
   const [lat, setLat] = useState(null);
+  const [showComponent, setShowComponent] = useState('reviews');
+  const [reviewToEdit, setReviewToEdit] = useState(null);
 
   const { id } = useParams();
 
@@ -27,6 +30,16 @@ export default function StudioShow({ user }) {
     getStudio();
   }, []);
 
+  const editReview = (reviewId) => {
+    axios
+      .get(`/api/editReview/${reviewId}`)
+      .then((response) => {
+        setReviewToEdit(response.data);
+        setShowComponent('editReview');
+      })
+      .catch((err) => console.log(err));
+  };
+
   console.log('studio', studio);
   return (
     <div>
@@ -43,8 +56,21 @@ export default function StudioShow({ user }) {
             }}
           >
             <StudioArtists studio={studio} user={user} getStudio={getStudio} />
-
-            <StudioReviews studio={studio} user={user} getStudio={getStudio} />
+            {showComponent === 'reviews' && (
+              <StudioReviews
+                studio={studio}
+                user={user}
+                getStudio={getStudio}
+                editReview={editReview}
+              />
+            )}
+            {showComponent === 'editReview' && (
+              <ReviewEdit
+                reviewToEdit={reviewToEdit}
+                setShowComponent={setShowComponent}
+                getStudio={getStudio}
+              />
+            )}
           </div>
         </div>
       </div>
