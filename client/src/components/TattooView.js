@@ -24,7 +24,7 @@ export default function TattooView({
   const getUserCollections = () => {
     // get request to the server
     axios
-      .get(`/api/crud/user/collections`)
+      .get(`/api/user/collections`)
       .then((response) => {
         setCollections(response.data);
       })
@@ -47,7 +47,7 @@ export default function TattooView({
   const handleNewCollectionSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('/api/crud/collections/new', {
+      .post('/api/collections/new', {
         collectionTitle,
         collectionDescription,
       })
@@ -66,7 +66,7 @@ export default function TattooView({
   const handleCollectionSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`/api/crud/tattoos/${selectedTattoo._id}`, {
+      .put(`/api/tattoos/${selectedTattoo._id}`, {
         selectedCollection: selectedCollection,
       })
       .then((response) => {
@@ -90,7 +90,7 @@ export default function TattooView({
     <Fade top duration={1000} delay={600} distance="30px">
       <div
         className="col-5 mt-3 card mb-3 bg-dark sticky border-white"
-        style={{ position: 'absolute', left: '30%' }}
+        style={{ position: 'absolute', left: '30%', top: '10%' }}
       >
         <div className="bg-dark bg-gradient col-12 text-white p-2 rounded d-flex justify-content-between">
           <div></div>
@@ -102,7 +102,7 @@ export default function TattooView({
           <button
             className="d-flex flex-end text-dark"
             style={{ height: '28px' }}
-            onClick={() => setTattooPopup('')}
+            onClick={() => setTattooPopup(false)}
           >
             X
           </button>

@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import Fade from 'react-reveal/Fade';
 import UserDashboardButtons from './UserDashboardButtons';
 
-export default function UserBio({ user }) {
-  const [showComponent, setShowComponent] = useState('userAppointments');
-
-  const [backgroundColor, setBackgroundColor] = useState('#a7aba8');
+export default function UserBio({
+  user,
+  setShowComponent,
+  backgroundColor,
+  setBackgroundColor,
+  setDashboardEditView,
+}) {
   if (!user) {
     return <></>;
   }
@@ -16,9 +19,7 @@ export default function UserBio({ user }) {
     >
       <Fade left duration={1000} delay={600} distance="30px">
         <div className="d-flex flex-column p-2">
-          {/* <div className="bg-dark bg-gradient text-white  p-2 rounded"> */}
           <h3 className="righteous p-1">Welcome {user.username}</h3>
-          {/* </div> */}
           <div className="d-flex flex-row align-items-center justify-content-center mt-1">
             <img
               className="border border-white border-4 mb-2"
@@ -48,7 +49,9 @@ export default function UserBio({ user }) {
           <div className="vl2"></div>
           <UserDashboardButtons
             setShowComponent={setShowComponent}
+            backgroundColor={backgroundColor}
             setBackgroundColor={setBackgroundColor}
+            setDashboardEditView={setDashboardEditView}
           />
         </Fade>
       </div>

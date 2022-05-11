@@ -43,7 +43,10 @@ export default function Explore() {
         setSelectedTattoo={setSelectedTattoo}
       />
       {tattooPopup && (
-        <TattooView selectedTattoo={selectedTattoo} tattooPopup={tattooPopup} />
+        <TattooView
+          selectedTattoo={selectedTattoo}
+          setTattooPopup={setTattooPopup}
+        />
       )}
     </div>
   );
