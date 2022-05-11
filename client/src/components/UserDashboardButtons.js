@@ -4,8 +4,14 @@ export default function UserDashboardButtons({
   setShowComponent,
   backgroundColor,
   setBackgroundColor,
+  setDashboardEditView,
 }) {
   const [backgroundEditor, setBackgroundEditor] = useState(false);
+
+  const handleEditDashboardChange = () => {
+    setShowComponent('editDashboard');
+    setDashboardEditView(true);
+  };
 
   return (
     <div className="d-flex flex-column">
@@ -25,7 +31,7 @@ export default function UserDashboardButtons({
       </button>
       <button
         className="btn btn-primary mb-3"
-        onClick={() => setShowComponent('editDashboard')}
+        onClick={handleEditDashboardChange}
       >
         Edit dashboard
       </button>
