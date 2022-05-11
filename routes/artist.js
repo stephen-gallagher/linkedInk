@@ -61,7 +61,6 @@ router.get('/:id/artist-profile', (req, res, next) => {
 // create review on artist page
 router.post('/:id/artist-profile/reviews', (req, res, next) => {
   const { reviewText, rating } = req.body;
-  console.log('yo yo', req.params);
   Review.create({
     reviewText: reviewText,
     rating: rating,
@@ -86,12 +85,38 @@ router.post('/:id/artist-profile/reviews', (req, res, next) => {
     });
 });
 
+router.get('/editReview/:reviewId', (req, res, next) => {
+  const { reviewId } = req.params;
+  Review.findById(reviewId)
+    .then((review) => {
+      res.status(200).json(review);
+    })
+    .catch((err) => next(err));
+});
+
+router.post('/editReview/:reviewId', (req, res, next) => {
+  const { reviewId } = req.params;
+  const { reviewText, rating } = req.body;
+  Review.findByIdAndUpdate(
+    reviewId,
+    {
+      reviewText: reviewText,
+      rating: rating,
+    },
+    { new: true }
+  )
+    .then((review) => {
+      console.log('this is the updated review', review);
+      res.status(200).json(review);
+    })
+    .catch((err) => next(err));
+});
+
 // Delete artist review
 router.delete(
   '/artist-profile/reviews/:artistId/:reviewId',
   (req, res, next) => {
     const { reviewId, artistId } = req.params;
-    console.log('ids', reviewId, artistId);
     Review.findByIdAndDelete(reviewId, { new: true })
       .then((deletedReview) => {
         User.findByIdAndUpdate(artistId, {

@@ -26,12 +26,12 @@ router.post('/login', (req, res, next) => {
 });
 
 router.post('/signup', (req, res, next) => {
-  console.log(req.body);
   const {
     role,
     username,
     password,
     profilePicture,
+    city,
     firstName,
     lastName,
     aboutMe,
@@ -69,6 +69,7 @@ router.post('/signup', (req, res, next) => {
         username: username,
         password: hash,
         profilePicture: profilePicture,
+        city: city,
         firstName: firstName,
         lastName: lastName,
         aboutMe: aboutMe,

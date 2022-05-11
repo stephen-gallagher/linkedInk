@@ -38,11 +38,29 @@ router.post(
 // add appointment to the user
 router.put('/:id/appointments', (req, res, next) => {
   const { date, time, location, artist, price } = req.body;
+  if (req.session.user) {
+    User.findByIdAndUpdate(
+      req.session.user._id,
+      { $push: { myAppointments: { date, time, price, location, artist } } },
+      { new: true }
+    )
+      .then((collectionFromDB) => {
+        // console.log('this is the collection', collectionFromDB)
+        res.status(200).json(collectionFromDB);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+});
+
+router.put('/:id/appointments/edit', (req, res, next) => {
+  const { date, time, location, artist, price } = req.body;
   console.log('body', req.body);
   if (req.session.user) {
     User.findByIdAndUpdate(
       req.session.user._id,
-      { $push: { myAppointments: { date, time, location, artist, price } } },
+      { $push: { myAppointments: { date, time, price, location, artist } } },
       { new: true }
     )
       .then((collectionFromDB) => {
@@ -58,6 +76,7 @@ router.put('/:id/appointments', (req, res, next) => {
 // get current user
 router.get('/users', (req, res, next) => {
   User.findById(req.session.user._id)
+    .populate('userCollections')
     .then((userFromDB) => {
       res.status(200).json(userFromDB);
     })
@@ -68,8 +87,26 @@ router.get('/users', (req, res, next) => {
 
 // get user profile
 router.get('/:id/user-dashboard', (req, res, next) => {
-  User.findById(req.params.id)
+  User.findById(req.session.user._id)
+    .populate({
+      path: 'myAppointments',
+      populate: {
+        path: 'artist',
+      },
+    })
+    .populate({
+      path: 'myAppointments',
+      populate: {
+        path: 'location',
+      },
+    })
+    .populate({
+      path: 'userCollections',
+    })
+    // .populate('userCollections')
+
     .then((userFromDB) => {
+      console.log('user here', userFromDB);
       res.status(200).json(userFromDB);
     })
     .catch((err) => {
@@ -100,8 +137,9 @@ router.get('/user/appointments', (req, res, next) => {
 
 // edit user styles and profile picture
 router.put('/:id/edit-user', (req, res, next) => {
-  const { favouriteStyles, profilePicture } = req.body;
+  const { username, favouriteStyles, profilePicture } = req.body;
   User.findByIdAndUpdate(req.params.id, {
+    username: username,
     favouriteStyles: favouriteStyles,
     profilePicture: profilePicture,
   })
