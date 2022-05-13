@@ -26,7 +26,7 @@ UER ACCOUNT
 - Users explore the website and add artist’s images to their personal collections
 - Users can leave reviews on artist or studio profiles, add appointments to their dashboard and make a booking request
 
-Artist Account
+ARTIST ACCOUNT
 - Artist creates account and selects their tattoo styles
 - Artist uploads images of their work to their public profile
 - Artist can create and become a member of a tattoo studio
